@@ -1,0 +1,343 @@
+"------------------------------------------------------------------------------
+"  < Bundle >
+"------------------------------------------------------------------------------
+
+"首先，加载vundle!
+set nocompatible  " be iMproved
+filetype off      " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+let g:vundle_default_git_proto="git"
+
+"配色
+Bundle "altercation/vim-colors-solarized"
+Bundle "tomasr/molokai"
+Bundle "sjl/badwolf"
+Bundle "Lokaltog/vim-powerline"
+
+"支持markdown语法高亮
+Bundle 'plasticboy/vim-markdown' 
+"自动补全
+Bundle 'Valloric/YouCompleteMe' 
+"toggling the display of the quickfix list and the location-list
+Bundle 'Valloric/ListToggle' 
+"语法检查
+Bundle 'scrooloose/syntastic'
+"自动关闭括号,[],{}等 自动光标置中
+Bundle 'jiangmiao/auto-pairs'
+"窗口浏览器
+Bundle "scrooloose/nerdtree" 
+"快速查找文件插件CtrlP
+Bundle "kien/ctrlp.vim" 
+"在.c和.h文件中跳转
+Bundle 'a.vim'
+"更加美观的显示缩进对齐线
+Bundle "Yggdroot/indentLine"
+
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-session'
+
+Bundle "taglist.vim"
+"一个注释插件
+Bundle 'tpope/vim-commentary' 
+"持久化的撤销操作插件
+Bundle 'sjl/gundo.vim' 
+"快速移动
+Bundle "Lokaltog/vim-easymotion" 
+"vim git 插件
+Bundle "tpope/vim-fugitive"
+"buffer快速浏览和切换
+Bundle "minibufexpl.vim"
+
+"Python.vim
+Bundle "python.vim--Vasiliev"
+"Python mode
+Bundle "klen/python-mode"
+"pep8 indent.
+Bundle "hynek/vim-python-pep8-indent"
+
+" 针对不同的文件类型加载对应的插件
+filetype plugin on
+" 针对不同的文件类型采用不同的缩进格式
+filetype plugin indent on
+
+"------------------------------------------------------------------------------
+"  < 基本 >
+"------------------------------------------------------------------------------
+set nu
+syntax enable
+set term=xterm-256color     "终端模式:xterm-256color,这个终端模式支持功能键Home,End等
+set title   "终端下名字由vim设置
+set t_Co=256    "开启256 color
+set hidden  "允许有未保存的内容时切换缓冲区
+set ttyfast
+syntax on
+set showcmd     "输入的命令显示出来
+set showmode    "显示当前模式
+set noeb    "关闭报警声音
+set mouse=a     "开启鼠标定位
+set autoread    "外部修改后自动更新这个文件
+set nocompatible    "告诉vim使用vim的键盘而不是vi的
+set shortmess=atI   "关闭启动时的救助贫困儿童的提示消息
+set cul "高亮当前行
+hi CursorLine term=none cterm=none ctermbg=3
+set cursorcolumn    "高亮当前列
+" set autochdir   "自动切换当前目录为当前文件所在目录
+set synmaxcol=800   "800个字符以上的行不去高亮
+set backspace=indent,eol,start
+set gdefault
+set hlsearch    "搜索
+set incsearch
+set ruler
+set nowrap  "不自动换行
+
+set guioptions-=T           " gvim隐藏工具栏
+set guioptions-=m           " gvim隐藏菜单栏
+set guifont=Consolas:h18    "设置gvim的字体
+
+set encoding=utf-8  "vim内部的编码
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbkgb2312,cp936   "新建一个文件的默认编码
+set termencoding=utf-8  "输出到终端的编码
+set fileencoding=utf-8  "vim写入文件的时候采用的编码
+
+set autoindent  "自动缩进
+set cindent     "类似C语言风格的缩进
+"智能缩进:每一行都和前一行有相同的缩进量,
+"同时这种缩进形式能正确的识别出花括号,当遇到右花括号（}）,
+"则取消缩进形式。此外还增加了识别C语言关键字的功能。
+"如果一行是以#开头的(比如宏)，那么这种格式将会被特殊对待而不采用缩进格式
+set smartindent
+autocmd FileType python set textwidth=79 "PEP-8 Friendly
+
+set expandtab   "把输入的tab自动转换成空格，Python用户必用~
+set tabstop=4   "一个tab键占据4个空格
+"一开始,插入的就是4个空格,此时一旦你再按下一次tab,这次的四个空格就会和上次的四个空格组合起来变成一个制表符
+set softtabstop=4
+set shiftwidth=4    "每一级自动缩进的空格数
+
+set list    "显示tab键
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    "list键的填充字符
+
+"根据文件类型设定缩进,覆盖掉默认的~,来自humiaozuzu
+autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=79
+autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=79
+autocmd FileType coffee,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=79
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=79
+autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
+autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=79
+
+set mouse=a     "启用鼠标的使用
+set selection=exclusive     "可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
+set selectmode=mouse,key
+set mousehide   "当敲键盘的时候隐藏鼠标指针
+set mousemodel=popup
+
+set foldenable
+set foldmethod=manual  "手动折叠
+set foldlevel=3
+
+set showmatch   "高亮显示匹配的括号
+set matchtime=1     "匹配括号高亮的时间（单位是十分之一秒）
+
+set completeopt=longest,menu
+set cpt=.,w,b
+
+" let mapleader=','
+
+
+"------------------------------------------------------------------------------
+"  < 插件配置 >
+"------------------------------------------------------------------------------
+set background=light
+" 设置背景透明度
+set transparency=7
+" 主题
+colorscheme solarized
+hi Normal ctermbg=NONE
+
+
+"NERDTree
+"最后只剩下nerdtree的时候关闭之
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeWinSize = 23 "nerdtree 的宽度
+let NERDTreeShowLineNumbers=1 "显示行号
+
+
+"PowerLine
+set laststatus=2 "状态栏
+let g:Powerline_symbols='fancy'
+
+
+"pep8, ctrl-k作为检查快捷键
+let g:pep8_map='<C-k>'
+
+
+"gundo 宽度
+let g:gundo_width=44
+
+
+"EasyMotion  \键
+let g:EasyMotion_leader_key = '<Leader>' 
+
+
+"taglist
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'  "use /usr/local/bin/ctags
+let Tlist_Show_One_File = 1     " 只显示当前文件的tag
+let Tlist_Exit_OnlyWindow = 1   "taglist是最后一个的时候退出vim
+let Tlist_Auto_Open=1   "open taglist on vim startup
+let Tlist_Auto_Highlight_Tag=1
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth=27
+
+
+"markdown
+let g:vim_markdown_folding_disabled=1
+
+
+"YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:syntastic_always_populate_loc_list = 1
+
+
+"ListToggle
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_height = 10
+
+
+"miniBufExplore
+let g:miniBufExplMapWindowNavArrows = 1
+"用Ctrl加方向键切换到上下左右的窗口中去
+let g:miniBufExplMapWindowNavVim = 1
+"用<C-k,j,h,l>切换到上下左右的窗口中去
+let g:miniBufExplMapCTabSwitchBufs = 1
+"--------------------  for pythonist, use vim-pep8-indent instead of pymode
+let g:pymode_indent = 0
+" Dont Load rope plugin
+let g:pymode_rope = 0
+" Disable pylint checking every save
+let g:pymode_lint_write = 0
+
+
+"indentLine
+map <leader>il :IndentLinesToggle<CR>
+"===============================
+"Session Support
+"===============================
+let g:session_autoload='no'
+let g:session_autosave='no'
+let g:session_directory="./"
+let g:ProjectSession_File=""
+
+fu! SaveSess()
+  set sessionoptions-=curdir
+  set sessionoptions+=sesdir
+  set sessionoptions+=slash
+  set sessionoptions+=unix
+  set sessionoptions-=options
+  execute 'mksession! '.g:ProjectSession_File
+endfunction
+
+fu! RestoreSess()
+  execute 'source '.g:ProjectSession_File
+endfunction
+
+function! LoadProject()
+let pj_file = findfile("filenametags", ".;")
+if (!empty(pj_file))
+  let path = strpart(pj_file, 0, match(pj_file, "/filenametags$"))
+  " add any database in current directory
+  if filereadable(pj_file)
+    let g:LookupFile_TagExpr=string(pj_file)
+  endif
+else
+  let g:LookupFile_TagExpr=string("./filenametags")
+endif
+if (!empty(path))
+  cd path
+endif
+
+let session_file = "./session.vim"
+let g:ProjectSession_File=session_file
+if filereadable(session_file)
+  call RestoreSess()
+else
+  call SaveSess()
+endif
+
+autocmd VimLeave * call SaveSess()
+
+exec "silent !echo 'Generating Tags...'"
+exec "silent !~/.vim/bin/mktags.sh"
+call LoadSetting()
+redraw!
+echo "Done!"
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set cscopeprg=gtags-cscope
+set cscopetag
+au BufWritePost *.[ch] call UpdateGtags(expand('<afile>'))
+au BufWritePost *.[ch]pp call UpdateGtags(expand('<afile>'))
+au BufWritePost *.[ch]xx call UpdateGtags(expand('<afile>'))
+au BufWritePost *.java call UpdateGtags(expand('<afile>'))
+au BufWritePost *.cc call UpdateGtags(expand('<afile>'))
+function! UpdateGtags(f)
+  let dir = fnamemodify(a:f, ':p:h')
+  exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
+endfunction
+
+function! LoadCscope()
+let db = findfile("GTAGS", ".;")
+if (!empty(db))
+  let path = strpart(db, 0, match(db, "/GTAGS$"))
+  set nocsverb " suppress 'duplicate connection' error
+  set csto=0
+  set cst
+  " add any database in current directory
+  if filereadable(db)
+     exe "cs add " . db . " " . path
+     nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+     nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+     nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+     nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+     nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+     nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+     nmap <C-c>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+     "nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+  " else add database pointed to by environment
+  elseif $CSCOPE_DB != ""
+     cs add $CSCOPE_DB
+  endif
+  set csverb
+endif
+endfunction
+au BufEnter /* call LoadCscope()
+
+"--------------- 系统剪切板 ---------------
+
+"ctrl-c复制到系统剪切板
+ map <C-c> "+y
+"ctrl-v粘贴到系统粘贴板
+ map <C-v> "+p
+
+"--------------  用户自定义命令 -------------------------------------
+"打开/关闭Nerdtree
+:command NT :NERDTreeToggle
+"打开/关闭tagbar
+:command TG :TlistToggle
+"打开关闭Gundo
+:command GD :GundoToggle
+"清除行尾空白
+:command WS :%s/\s\+$//e
+" -------------------------------------------------------------------
+"
+autocmd BufWrite *.c :WS
+autocmd BufWrite *.h :WS
+":w!! to sudo write file
+cmap w!! w !sudo tee >/dev/null %
+
