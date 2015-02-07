@@ -1,4 +1,4 @@
 #Host github.com    
 #	ProxyCommand connect -H 192.168.18.146:8089 %h %p
-Host *.unix-center.net    
-	ProxyCommand connect -H 192.168.18.146:8089 %h %p	
+#Host *.unix-center.net    
+#	ProxyCommand connect -H 192.168.18.146:8089 %h %p	

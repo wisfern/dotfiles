@@ -16,3 +16,6 @@
 [push]
 #	default = simple
 	default = matching
+[http]
+	proxy = 172.16.1.13:808
+#	sslVerify = false
