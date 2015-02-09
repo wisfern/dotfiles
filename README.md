@@ -32,10 +32,14 @@
 
 ##git
 
-    * git使用方法请参见[《Git Community Book 中文版》](http://gitbook.liuhui998.com/index.html)
-    * 可以使用下面的命令初始化git配置环境
-    $ make git
+* [《Git Community Book 中文版》](http://gitbook.liuhui998.com/index.html)
+* [《Git教程》](http://www.yiibai.com/git)
+* 可以使用下面的命令初始化git配置环境
     
+    ```shell
+    $ make git
+    ```
+ 
 首先，更新所有submodule:
 
     $ git submodule update --init

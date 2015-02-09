@@ -15,7 +15,7 @@
 	lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 [push]
 #	default = simple
-	default = matching
+#	default = matching
 [http]
 	proxy = 172.16.1.13:808
 #	sslVerify = false
