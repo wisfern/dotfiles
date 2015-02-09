@@ -32,8 +32,31 @@
 
 ##git
 
+    * git使用方法请参见[《Git Community Book 中文版》](http://gitbook.liuhui998.com/index.html)
+    * 可以使用下面的命令初始化git配置环境
     $ make git
-     
+    
+首先，更新所有submodule:
+
+    $ git submodule update --init
+
+如果需要强制建立软连接(以vim为例):
+
+    $ make vim force=1
+
+##vim
+
+1. 系统依赖: ctags
+
+2. 安装ctags:
+
+    * Download ctags from <http://ctags.sourceforge.net/>
+    * extract it, and
+
+    ```
+    $ ./configure
+    $ sudo make install
+    ```uu
 ##tmux
 
     $ make tmux
