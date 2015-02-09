@@ -1,0 +1,1 @@
+alias ssh-gbk='luit -encoding gbk ssh'

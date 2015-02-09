@@ -1,5 +1,5 @@
 # vim:set noet: 
-.PHONY : vim ssh git tmux
+.PHONY : vim ssh git tmux bash
 
 LNSOPT=-s
 
@@ -9,7 +9,7 @@ ifdef force
 	endif
 endif
 
-all:ssh git tmux vim
+all:ssh git tmux vim bash
 
 submodule:
 	git submodule update --init
@@ -31,3 +31,7 @@ git:
 
 tmux:
 	ln $(LNSOPT) $(CURDIR)/tmux/tmux.conf ~/.tmux.conf
+
+bash:
+	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias
+	ln $(LNSOPT) $(CURDIR)/bash/function ~/.function

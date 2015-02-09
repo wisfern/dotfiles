@@ -1,0 +1,8 @@
+function g2
+{
+        case $1 in
+        102) ssh -l kf  172.16.1.102;;
+        110) ssh-gbk -l xzf 172.16.1.110;;
+        111) luit -encoding gbk ssh -l xzf 172.16.1.111;;
+        esac
+}

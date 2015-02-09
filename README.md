@@ -38,6 +38,10 @@
 
     $ make tmux
 
+##bash
+
+    $ make bash
+
 ##reference
 
 *最初阅读并参考了hit9的文章和dotfiles，特此表示感谢*
