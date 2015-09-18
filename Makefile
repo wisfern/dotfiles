@@ -9,7 +9,7 @@ ifdef force
 	endif
 endif
 
-all:ssh git tmux vim bash
+all:ssh git tmux bash vim
 
 submodule:
 	git submodule update --init
@@ -35,3 +35,4 @@ tmux:
 bash:
 	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias
 	ln $(LNSOPT) $(CURDIR)/bash/function ~/.function
+	ln $(LNSOPT) $(CURDIR)/bask/bashrc ~/.bashr

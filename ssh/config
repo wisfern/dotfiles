@@ -1,3 +1,22 @@
+#SendEnv LANG LC_*
+GSSAPIAuthentication no
+#GSSAPIDelegateCredentials no
+
+Host hadoop14
+HostName 172.16.1.174
+User xzf
+Port 22
+
+Host hadoop15
+HostName 172.16.1.175
+User xzf
+Port 22
+
+Host hadoop16
+HostName 172.16.1.176
+User xzf
+Port 22
+
 #Host github.com    
 #	ProxyCommand connect -H 192.168.18.146:8089 %h %p
 #Host *.unix-center.net    

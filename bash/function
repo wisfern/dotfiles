@@ -4,5 +4,10 @@ function g2
         102) ssh -l kf  172.16.1.102;;
         110) ssh-gbk -l xzf 172.16.1.110;;
         111) luit -encoding gbk ssh -l xzf 172.16.1.111;;
+	31)  luit -encoding gbk ssh -l xzf 172.16.1.31;;
+	baolei) luit -encoding gbk ssh -l longzm 172.16.1.20;;
+	hadoop1) ssh $1;;
+	hadoop2) ssh $1;;
+	hadoop3) ssh $1;;
         esac
 }
