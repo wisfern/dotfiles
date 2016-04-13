@@ -1,8 +1,9 @@
 test -s ~/.alias && . ~/.alias || true
+test -s ~/.bash_alias && . ~/.bash_alias || true
 test -s ~/.function && . ~/.function || true
 
-export https_proxy=https://172.16.1.13:808
-export http_proxy=http://172.16.1.13:808
+#export https_proxy=https://172.16.1.13:808
+#export http_proxy=http://172.16.1.13:808
 
 export TERM=xterm-256color
 export LESS=-R
@@ -58,11 +59,6 @@ if [ -x /usr/bin/dircolors ]; then
 	#alias egrep='egrep --color=auto'
 fi
 
-
-
-if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
-fi
 
 if ! shopt -oq posix; then
 	if [ -f /usr/share/bash-completion/bash_completion ]; then

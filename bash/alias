@@ -1,1 +1,2 @@
 alias ssh-gbk='luit -encoding gbk ssh'
+alias wcode='cd ~/work/code'

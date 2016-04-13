@@ -9,5 +9,7 @@ function g2
 	hadoop1) ssh $1;;
 	hadoop2) ssh $1;;
 	hadoop3) ssh $1;;
+	sanshui) perl ~/.exp2.pl dz;;
+	dzx86)   perl ~/.exp2.pl dzx86;;
         esac
 }
