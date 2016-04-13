@@ -35,4 +35,4 @@ tmux:
 bash:
 	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias
 	ln $(LNSOPT) $(CURDIR)/bash/function ~/.function
-	ln $(LNSOPT) $(CURDIR)/bask/bashrc ~/.bashr
+	ln $(LNSOPT) $(CURDIR)/bash/bashrc ~/.bashrc
