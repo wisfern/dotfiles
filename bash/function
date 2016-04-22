@@ -9,7 +9,8 @@ function g2
 	hadoop1) ssh $1;;
 	hadoop2) ssh $1;;
 	hadoop3) ssh $1;;
-	sanshui) perl ~/.exp2.pl dz;;
-	dzx86)   perl ~/.exp2.pl dzx86;;
+	sanshui) luit -encoding gbk perl ~/.exp2.pl dz;;
+	dzx86)   luit -encoding gbk perl ~/.exp2.pl dzx86;;
+	230)     ssh ng3ra@172.16.1.230;;
         esac
 }

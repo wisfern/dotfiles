@@ -1,6 +1,7 @@
 #SendEnv LANG LC_*
 GSSAPIAuthentication no
 #GSSAPIDelegateCredentials no
+ServerAliveInterval 60
 
 Host hadoop14
 HostName 172.16.1.174
