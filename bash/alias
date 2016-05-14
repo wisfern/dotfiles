@@ -4,3 +4,5 @@ alias wcode='cd ~/work/code'
 alias f_db2e='db2 connect to bitest user etl using gmcc1234'
 alias f_db2t='db2 terminate'
 
+alias lt='ls -lrt'
+

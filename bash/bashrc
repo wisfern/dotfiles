@@ -2,6 +2,10 @@ test -s ~/.alias && . ~/.alias || true
 test -s ~/.bash_alias && . ~/.bash_alias || true
 test -s ~/.function && . ~/.function || true
 
+test -s ~/work/code/env_init && . ~/work/code/env_init || true
+
+ulimit -c unlimited
+
 #export https_proxy=https://172.16.1.13:808
 #export http_proxy=http://172.16.1.13:808
 
