@@ -9,9 +9,21 @@ function g2
 	hadoop1) ssh $1;;
 	hadoop2) ssh $1;;
 	hadoop3) ssh $1;;
+	hadoop4) ssh $1;;
+	hadoop5) ssh $1;;
 	sanshui) luit -encoding gbk perl ~/.exp2.pl dz;;
 	dzx86)   luit -encoding gbk perl ~/.exp2.pl dzx86;;
+	srjh)    perl ~/.exp2.pl srjh;;
+	send2srjh) perl ~/.exp2.pl $1 $2 $3;;
 	230)     ssh ng3ra@172.16.1.230;;
-	181)     ssh hadoop@172.16.1.181;;
+	222)     ssh hadoop@172.16.1.222;;
+	223)     ssh hadoop@172.16.1.223;;
+	225)     ssh hadoop@172.16.1.225;;
+	226)     ssh hadoop@172.16.1.226;;
+	227)     ssh hadoop@172.16.1.227;;
+	228)     ssh hadoop@172.16.1.228;;
+	181)     ssh root@172.16.1.181;;
+	176)     ssh root@172.16.1.176;;
+	234)     ssh hadoop@172.16.1.234;;
         esac
 }

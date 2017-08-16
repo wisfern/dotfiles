@@ -1,0 +1,13 @@
+pandas
+numpy
+requests
+logbook
+demjson
+tushare
+easytrader
+easyquotation
+dHydra
+statsmodels
+matplotlib
+TA-Lib
+zipline

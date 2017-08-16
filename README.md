@@ -63,11 +63,27 @@
     ```uu
 ##tmux
 
+	* [zsh和oh-my-zsh安装与配置](https://blog.phpgao.com/oh-my-zsh.html)
+
     $ make tmux
+
+##zsh
+
+* [zsh和oh-my-zsh安装与配置](https://blog.phpgao.com/oh-my-zsh.html)
+
+	$ make zsh
 
 ##bash
 
     $ make bash
+	
+##python
+安装python3常用模块
+	
+	$ make python
+	
+python2则执行命令安装
+	$ pip2 install -r python/requirements.txt
 
 ##reference
 

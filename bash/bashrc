@@ -6,8 +6,21 @@ test -s ~/work/code/env_init && . ~/work/code/env_init || true
 
 ulimit -c unlimited
 
+export JAVA_HOME=/usr
+
+export HADOOP_HOME=/home/devis/hadoop/hadoop-2.7.2
+export HBASE_HOME=/home/devis/hadoop/hbase-1.1.4
+export HIVE_HOME=/home/devis/hadoop/hive-1.2.1
+export MAVEN_HOME=/home/devis/hadoop/apache-maven-3.3.9
+export PATH=$PATH:$HADOOP_HOME/bin:$HBASE_HOME/bin:$HIVE_HOME/bin:$MAVEN_HOME/bin
+export HADOOP_USER_NAME=hadoop
+export PYTHONPATH=/home/devis/git/vnpy
+
 #export https_proxy=https://172.16.1.13:808
-#export http_proxy=http://172.16.1.13:808
+#export http_proxy=http://localhost:3128
+
+#python 
+export PATH=$PATH:$HOME/.local/bin
 
 export TERM=xterm-256color
 export LESS=-R
