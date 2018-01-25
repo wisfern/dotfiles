@@ -1,3 +1,9 @@
 [submodule "vim/vundle"]
 	path = vim/vundle
 	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "vim/k-vim"]
+	path = vim/k-vim
+	url = https://github.com/wklken/k-vim.git
+[submodule "vim/k-vim-server"]
+	path = vim/k-vim-server
+	url = https://github.com/wklken/vim-for-server.git

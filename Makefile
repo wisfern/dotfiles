@@ -15,13 +15,15 @@ submodule:
 	git submodule update --init
 
 vim:submodule
-	cd vim/vundle ; git checkout master ; git pull;
-	mkdir -p ~/.vim/bundle/ 
-	ln $(LNSOPT) $(CURDIR)/vim/vimrc ~/.vimrc
-	ln $(LNSOPT) $(CURDIR)/vim/vundle ~/.vim/bundle/
-	vim +PluginInstall +qall
+	cd vim/k-vim ; git checkout master ; git pull;
+	sh install.sh --for-vim
+	#cd vim/vundle ; git checkout master ; git pull;
+	#mkdir -p ~/.vim/bundle/ 
+	#ln $(LNSOPT) $(CURDIR)/vim/vimrc ~/.vimrc
+	#ln $(LNSOPT) $(CURDIR)/vim/vundle ~/.vim/bundle/
+	#vim +PluginInstall +qall
 	#vim -c "BundleInstall"
-	cd ~/.vim/bundle/YouCompleteMe ;  ./install.sh --clang-completer
+	#cd ~/.vim/bundle/YouCompleteMe ;  ./install.sh --clang-completer
 
 ssh:
 	ln $(LNSOPT) $(CURDIR)/ssh/config ~/.ssh/config
@@ -43,6 +45,6 @@ bash:
 	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias
 	ln $(LNSOPT) $(CURDIR)/bash/function ~/.function
 	ln $(LNSOPT) $(CURDIR)/bash/bashrc ~/.bashrc
-	
+
 python:
 	pip install -r python/requirements.txt
