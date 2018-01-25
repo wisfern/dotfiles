@@ -38,8 +38,8 @@ tmux:
 zsh:
 	ln $(LNSOPT) $(CURDIR)/zsh/zshrc ~/.zshrc
 	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-	chsh -s `which zsh`
-	upgrade_oh_my_zsh
+	echo "请运行命令自行变更shell程序 chsh -s `which zsh`"
+	#upgrade_oh_my_zsh
 
 bash:
 	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias
