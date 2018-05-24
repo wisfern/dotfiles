@@ -89,7 +89,7 @@ source $ZSH/oh-my-zsh.sh
 #
 set -o vi
 #python 
-export PATH=$PATH:$HOME/.local/bin
+export PATH=$HOME/.local/bin:$PATH
 
 test -s ~/.alias && . ~/.alias || true
 test -s ~/.bash_alias && . ~/.bash_alias || true
@@ -109,3 +109,10 @@ export PATH=$PATH:$HADOOP_HOME/bin:$HBASE_HOME/bin:$HIVE_HOME/bin:$MAVEN_HOME/bi
 export HADOOP_USER_NAME=hadoop
 export PYTHONPATH=/home/devis/git/vnpy
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PATH="/home/devis/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

@@ -1,5 +1,5 @@
 # vim:set noet: 
-.PHONY : vim ssh git tmux zsh bash
+.PHONY : vim ssh git tmux zsh bash pip
 
 LNSOPT=-s
 
@@ -9,7 +9,7 @@ ifdef force
 	endif
 endif
 
-all:ssh git tmux zsh bash vim
+all:ssh git tmux zsh bash vim pip
 
 submodule:
 	git submodule update --init
@@ -17,6 +17,7 @@ submodule:
 vim:submodule
 	cd vim/k-vim ; git checkout master ; git pull;
 	sh install.sh --for-vim
+	ln $(LNSOPT) $(CURDIR)/vim/gtags.conf ~/.gtags.conf
 	#cd vim/vundle ; git checkout master ; git pull;
 	#mkdir -p ~/.vim/bundle/ 
 	#ln $(LNSOPT) $(CURDIR)/vim/vimrc ~/.vimrc
@@ -48,3 +49,7 @@ bash:
 
 python:
 	pip install -r python/requirements.txt
+
+pip:
+	mkdir -p ~/.pip
+	ln $(LNSOPT) $(CURDIR)/pip/pip.conf ~/.pip/pip.conf
