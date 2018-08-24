@@ -1,0 +1,18 @@
+host:
+ # 行定义格式, 只支持ssh这一种方式的跳转, 密码为-表示为免密，多个登陆选项用;分隔
+ # 主机简称  主机ip|0        ssh端口|1 用户名|2  密码|3    登陆前期望|4  提示符|5        登陆选项|6  登陆后执行的命令|7
+    baolei2: [172.16.0.20,   10137,    xusrf,  ~,        ~,            "xf@BZG2",        ~,           ~,          ]
+    ssh3:    [192.252.05.3,  22,       kf,     ~,        ~,            "kf@SR-DB01",     ~,           "echo $TERM",          ]
+    xiaohf6: [10.252.19.6,   22,       xiaf,   Au39,     ~,            "/home/ohf",      ~,           "cd zd && export LANG=zh_CN.UTF-8",   ]
+    hd228:   [172.16.10.228, 22,       user,   passwd,   ~,            "oop@hadoop7",    ~,           ~,          ]
+
+route:
+  ssh3:
+    - baolei2
+  baolei2:
+    - local
+  hd228:
+    - local
+  xiaohf6:
+    - ssh3
+

@@ -11,3 +11,5 @@ statsmodels
 matplotlib
 TA-Lib
 zipline
+pyyaml
+pexpect

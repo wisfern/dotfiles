@@ -86,4 +86,4 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-eval "$(pipenv --completion)"
+# eval "$(pipenv --completion)"

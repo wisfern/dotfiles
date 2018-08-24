@@ -1,0 +1,16 @@
+[[source]]
+# url = "https://pypi.org/simple"
+url = "https://mirrors.ustc.edu.cn/pypi/web/simple/"
+name = "ustc"
+verify_ssl = true
+# name = "pypi"
+
+[packages]
+pexpect = "*"
+pyyaml = "*"
+
+[dev-packages]
+ipython = "*"
+
+[requires]
+python_version = "3.6"
