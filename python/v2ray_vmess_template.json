@@ -1,0 +1,222 @@
+{
+    "log": {
+        "access": "/var/log/v2ray/access1.log",
+        "error": "/var/log/v2ray/error1.log",
+        "loglevel": "warning"
+    },
+    "inbound": {
+        "port": 1081,
+        "listen": "0.0.0.0",
+        "protocol": "socks",
+        "sniffing": {
+            "enabled": true,
+            "destOverride": [
+                "http",
+                "tls"
+            ]
+        },
+        "settings": {
+            "auth": "noauth",
+            "udp": true,
+            "ip": "127.0.0.1",
+            "clients": null
+        },
+        "streamSettings": null
+    },
+    "outbounds": [
+        {
+            "protocol": "shadowsocks",
+            "settings": {
+                "servers": [
+                    {
+                        "email": "0@test.com",
+                        "address": "59.125.61.180",
+                        "port": 8097,
+                        "method": "aes-256-cfb",
+                        "password": "eIW0Dnk69454e6nSwuspv9DmS201tQ0D",
+                        "ota": false,
+                        "level": 0
+                    },
+                    {
+                        "email": "1@test.com",
+                        "address": "hostclean.sopoy.com",
+                        "port": 1677,
+                        "method": "aes-256-cfb",
+                        "password": "QQtoLuw",
+                        "ota": false,
+                        "level": 0
+                    },
+                    {
+                        "email": "3@test.com",
+                        "address": "194.147.35.95",
+                        "port": 2333,
+                        "method": "aes-256-cfb",
+                        "password": "tgdaili",
+                        "ota": false,
+                        "level": 0
+                    },
+                    {
+                        "email": "4@test.com",
+                        "address": "ss3.cacss.me",
+                        "port": 8866,
+                        "method": "aes-256-cfb",
+                        "password": "8981241636",
+                        "ota": false,
+                        "level": 0
+                    },
+                    {
+                        "email": "6@test.com",
+                        "address": "185.246.154.25",
+                        "port": 20037,
+                        "method": "aes-256-cfb",
+                        "password": "t2A5zG",
+                        "ota": false,
+                        "level": 0
+                    },
+                    {
+                        "email": "8@test.com",
+                        "address": "ss2.cacss.me",
+                        "port": 8003,
+                        "method": "aes-256-cfb",
+                        "password": "7343720717",
+                        "ota": false,
+                        "level": 0
+                    }
+                ]
+            }
+        },
+        {
+            "tag": "agentout",
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "jp1.ubuntumirror.ml",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "87b0b361-6e99-4cb9-b13c-deb003c5adcb",
+                                "alterId": 233,
+                                "email": "t@t.tt",
+                                "security": "aes-128-gcm"
+                            }
+                        ]
+                    }
+                ],
+                "servers": null
+            },
+            "streamSettings": {
+                "network": "h2",
+                "security": "tls",
+                "tlsSettings": {
+                    "allowInsecure": true,
+                    "serverName": null
+                },
+                "tcpSettings": null,
+                "kcpSettings": null,
+                "wsSettings": null,
+                "httpSettings": {
+                    "path": "janet",
+                    "host": [
+                        "jp1.ubuntumirror.ml"
+                    ]
+                }
+            },
+            "mux": {
+                "enabled": true
+            }
+        },
+        {
+            "tag": "agentout",
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "us1-nodes.v2ray.trade",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "dba96fa8-f582-11e8-b894-00163cca416d",
+                                "alterId": 64,
+                                "email": "t@t.tt",
+                                "security": "aes-128-gcm"
+                            }
+                        ]
+                    }
+                ],
+                "servers": null
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "tlsSettings": {
+                    "allowInsecure": true,
+                    "serverName": null
+                },
+                "tcpSettings": null,
+                "kcpSettings": null,
+                "wsSettings": {
+                    "connectionReuse": true,
+                    "path": "/acdc",
+                    "headers": {
+                        "Host": "us1-nodes.v2ray.trade"
+                    }
+                },
+                "httpSettings": null
+            },
+            "mux": {
+                "enabled": true
+            }
+        },
+        {
+            "protocol": "freedom",
+            "settings": {},
+            "tag": "direct"   //如果要使用路由，这个 tag 是一定要有的，在这里 direct 就是 freedom 的一个标号，在路由中说 direct V2Ray 就知道是这里的 freedom 了
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {},
+            "tag": "adblock"  //同样的，这个 tag 也是要有的，在路由中说 adblock 就知道是这里的 blackhole（黑洞） 了
+        }],
+        "dns": {
+            "servers": [
+                "8.8.8.8",
+                "8.8.4.4",
+                "localhost"
+            ]
+        },
+        "routing": {
+            "domainStrategy": "IPIfNonMatch",
+            "balancers": [
+            ],
+            "rules": [
+                {
+                    "type": "field",
+                    "port": null,
+                    "outboundTag": "direct",
+                    "ip": [
+                        "0.0.0.0/8",
+                        "10.0.0.0/8",
+                        "100.64.0.0/10",
+                        "127.0.0.0/8",
+                        "169.254.0.0/16",
+                        "172.16.0.0/12",
+                        "192.0.0.0/24",
+                        "192.0.2.0/24",
+                        "192.168.0.0/16",
+                        "198.18.0.0/15",
+                        "198.51.100.0/24",
+                        "203.0.113.0/24",
+                        "::1/128",
+                        "fc00::/7",
+                        "fe80::/10",
+                        "geoip:cn",
+                        "geoip:private"
+                    ],
+                    "domain": [
+                        "geosite:cn"
+                    ]
+                }
+            ]
+        }
+}

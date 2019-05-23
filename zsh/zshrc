@@ -107,7 +107,8 @@ export HIVE_HOME=/home/devis/hadoop/hive-1.2.1
 export MAVEN_HOME=/home/devis/hadoop/apache-maven-3.3.9
 export PATH=$PATH:$HADOOP_HOME/bin:$HBASE_HOME/bin:$HIVE_HOME/bin:$MAVEN_HOME/bin
 export HADOOP_USER_NAME=hadoop
-export PYTHONPATH=/home/devis/git/vnpy
+export PYTHONPATH=/home/devis/git/vnpy:/home/devis/git/backtrader:/home/devis/OutlierAnalysis/zvt
+export ZVT_DATA_PATH=/home/devis/OutlierAnalysis/zvt/data
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -117,3 +118,12 @@ export PATH="/home/devis/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(pipenv --completion)"
+
+source /home/devis/.gvm/scripts/gvm
+export GOROOT=/home/devis/go
+export GOPATH=/home/devis/gopkg
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+#alias
+alias tnew="tmux new -s"
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile

@@ -52,8 +52,10 @@ def update_ssr_config(ssr_config, to=None):
 
 
 if __name__ == '__main__':
+    import os
     import sys
 
+    ssr_restart_cmd = None  # 'ssr restart'
     if len(sys.argv) < 2:
         print("Usage: {} <server:ip>".format(sys.argv[0]))
         sys.exit(-1)
@@ -65,5 +67,7 @@ if __name__ == '__main__':
         # 转换为config的格式
         logging.info('update ssr config.json success => {}:{}\n{}'.format(server, ip, search_result[0]['ssr_url']))
         update_ssr_config(search_result[0], config['target_config'])
+        if ssr_restart_cmd:
+            os.system(ssr_restart_cmd)
     else:
         logging.info('can\'n find {}:{} ssr config'.format(server, ip))

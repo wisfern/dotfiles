@@ -14,7 +14,7 @@ export HIVE_HOME=/home/devis/hadoop/hive-1.2.1
 export MAVEN_HOME=/home/devis/hadoop/apache-maven-3.3.9
 export PATH=$PATH:$HADOOP_HOME/bin:$HBASE_HOME/bin:$HIVE_HOME/bin:$MAVEN_HOME/bin
 export HADOOP_USER_NAME=hadoop
-export PYTHONPATH=/home/devis/git/vnpy
+export PYTHONPATH=/home/devis/git/vnpy:/home/devis/OutlierAnalysis/zvt
 
 #export https_proxy=https://172.16.1.13:808
 #export http_proxy=http://localhost:3128
@@ -87,3 +87,14 @@ if ! shopt -oq posix; then
 fi
 
 # eval "$(pipenv --completion)"
+
+[[ -s "/home/devis/.gvm/scripts/gvm" ]] && source "/home/devis/.gvm/scripts/gvm"
+
+# export DISPLAY=localhost:10.0
+
+# SSH的输入法选择
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+
+export ZVT_DATA_PATH=/home/devis/OutlierAnalysis/zvt/data
