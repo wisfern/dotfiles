@@ -37,10 +37,10 @@ tmux:
 	ln $(LNSOPT) $(CURDIR)/tmux/tmux.conf ~/.tmux.conf
 
 zsh:
-	ln $(LNSOPT) $(CURDIR)/zsh/zshrc ~/.zshrc
 	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 	echo "请运行命令自行变更shell程序 chsh -s `which zsh`"
 	#upgrade_oh_my_zsh
+	ln $(LNSOPT) $(CURDIR)/zsh/zshrc ~/.zshrc
 
 bash:
 	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias
@@ -50,6 +50,11 @@ bash:
 python:
 	pip install -r python/requirements.txt
 
+gto:
+	ln $(LNSOPT) $(CURDIR)/python/gto.py ~/.local/bin/gto
+
 pip:
-	mkdir -p ~/.pip
-	ln $(LNSOPT) $(CURDIR)/pip/pip.conf ~/.pip/pip.conf
+	mkdir -p ~/.config/pip
+	ln $(LNSOPT) $(CURDIR)/pip/pip.conf ~/.config/pip/pip.conf
+	# pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+	# pip config set install.trusted-host pypi.douban.com

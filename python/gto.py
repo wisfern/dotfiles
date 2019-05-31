@@ -1,4 +1,4 @@
-#!/home/devis/.local/share/virtualenvs/gto-eLTPUmZa/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -11,6 +11,8 @@ from pexpect import pxssh
 import logging
 logging.basicConfig(level=logging.INFO,
                     format="%(level)s %(message)s")
+
+# import pysnooper
 
 
 def get_terminal_dimensions():
@@ -38,7 +40,8 @@ class Config(dict):
             logging.error("%s 路由文件不存在" % yaml_file)
             return
         with open(yaml_file) as file_obj:
-            conf = yaml.load(file_obj.read())
+            # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
+            conf = yaml.load(file_obj.read(), Loader=yaml.SafeLoader)
             self.from_mapping(conf)
 
     def from_mapping(self, *mapping, **kwargs):
@@ -127,7 +130,7 @@ class Config(dict):
         except KeyError as e:
             sys.exit(2)
         except Exception as e:
-            print(type(e), e)
+            # print(type(e), e)
             raise e
 
     def show_routes(self):
@@ -263,6 +266,7 @@ class Gto(object):
         if self.debug >= 1:
             print("{} exit!".format(exited_host))
 
+    # @pysnooper.snoop()
     def ssh_login(self, host):
         # 登陆到指定的机器，如果为local则，新建expect对象
         focus = '$'
@@ -297,7 +301,11 @@ class Gto(object):
         return focus
 
     def __call__(self, target):
-        self.login_to(target)
+        try:
+            self.login_to(target)
+        except Exception as e:
+            logging.error(e)
+            sys.exit(1)
 
         # 归还终端
         # self.expect.sendcontrol('c')
@@ -305,8 +313,12 @@ class Gto(object):
         self.expect.logfile_read = None
         self.expect.interact()
 
+    # @pysnooper.snoop()
     def scp_file(self, source, target):
         scp_source_d, scp_target_d = self._init_scp_inf(source, target)
+        if scp_source_d['s_file'] != scp_target_d['d_file']:
+            logging.error("暂不支持本地与远程文件名不一致的传输")
+            return False
         s_d_ru, transit = self.generate_target_route(scp_target_d['d_host'], scp_source_d['s_host'])
         # 登陆到中转机
         focus = self.login_to(transit)
@@ -325,7 +337,7 @@ class Gto(object):
             self._x_put_file_to_target(put_ru[1:], scp_target_d['d_host']
                                        , scp_target_d['d_path']
                                        , scp_target_d['d_file']
-                                       , scp_source_d['s_path'] if transit == s_d_ru[-1] else '/tmp'
+                                       , scp_source_d['s_path'] if transit == s_d_ru[0] else '/tmp'
                                        , focus)
             # TODO: 如果非两端机，还得清理一下中间数据
         except Exception as e:
@@ -358,8 +370,10 @@ class Gto(object):
         # 把下一台机的文件scp过来到本机
         scp_source_path = source_path if ru[1] == source_host else '/tmp'
         host_src = self.config.get_host(ru[1])
-        scp_cmd = "scp -P {port} {user}@{ip}:{scp_source_path}/{file_name} {target_path}/{file_name} ;".format(
-            port=host_src[1], user=host_src[2], ip=host_src[0], **locals()
+        scp_cmd = "scp -P {port} {user}@{ip}:{scp_source_file} {scp_target_file} ;".format(
+            port=host_src[1], user=host_src[2], ip=host_src[0],
+            scp_source_file=os.path.join(scp_source_path, file_name),
+            scp_target_file=os.path.join(target_path, file_name)
         )
         scp_nospace_left_err = 'No space left on device'
         cmd = scp_cmd
@@ -382,6 +396,7 @@ class Gto(object):
                 print("get file error! [{}] index[{}]".format(scp_cmd, i))
                 return False
 
+    # @pysnooper.snoop()
     def _x_put_file_to_target(self, ru, target_host, target_path, file_name, source_path='/tmp/', focus='$'):
         """
         :param ru: 目标路由 [source, ..., target]
@@ -392,11 +407,10 @@ class Gto(object):
         # 目标机
         scp_target_path = target_path if ru[0] == target_host else '/tmp'
         host_src = self.config.get_host(ru[0])
-        scp_cmd = "scp -P {port} {source_path}/{file_name} {user}@{ip}:{scp_target_path}/{file_name}".format(
-            port=host_src[1]
-            , user=host_src[2]
-            , ip=host_src[0]
-            , **locals()
+        scp_cmd = "scp -P {port} {scp_source_file} {user}@{ip}:{scp_target_file}".format(
+            port=host_src[1], user=host_src[2], ip=host_src[0],
+            scp_source_file=os.path.join(source_path, file_name),
+            scp_target_file=os.path.join(scp_target_path, file_name)
         )
         scp_nospace_left_err = 'No space left on device'
         cmd = scp_cmd
@@ -432,20 +446,20 @@ class Gto(object):
         """
         if ':' in source:
             s_host, abs_path = source.split(':')
-            s_path = os.path.dirname(abs_path)
+            s_path = os.path.dirname(abs_path) if os.path.dirname(abs_path) else '.'
             s_file = os.path.basename(abs_path)
         else:
             s_host = 'local'
-            s_path = os.path.dirname(source)
+            s_path = os.path.dirname(source) if os.path.dirname(source) else '.'
             s_file = os.path.basename(source)
 
         if ':' in target:
             d_host, abs_path = target.split(':')
-            d_path = os.path.dirname(abs_path)
+            d_path = os.path.dirname(abs_path) if os.path.dirname(abs_path) else '.'
             d_file = os.path.basename(abs_path)
         else:
             d_host = 'local'
-            d_path = os.path.dirname(target)
+            d_path = os.path.dirname(target) if os.path.dirname(target) else '.'
             d_file = os.path.basename(target)
 
         return {'s_host': s_host, 's_path': s_path, 's_file': s_file}, {'d_host': d_host, 'd_path': d_path, 'd_file': d_file}
