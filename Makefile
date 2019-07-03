@@ -41,6 +41,7 @@ zsh:
 	echo "请运行命令自行变更shell程序 chsh -s `which zsh`"
 	#upgrade_oh_my_zsh
 	ln $(LNSOPT) $(CURDIR)/zsh/zshrc ~/.zshrc
+	ln $(LNSOPT) $(CURDIR)/zsh/function ~/.function
 
 bash:
 	ln $(LNSOPT) $(CURDIR)/bash/alias ~/.alias

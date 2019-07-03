@@ -27,3 +27,17 @@ function g2
 	234)     ssh hadoop@172.16.1.234;;
         esac
 }
+
+# 在线翻译  v2 cool 
+v2() {
+  str=''
+  arr=("$@")
+  for i in ${!arr[@]}; do
+    if [ "$i" -eq 0 ]; then
+      str+="${arr[$i]}"
+    else
+      str+="%20${arr[$i]}"
+    fi
+  done
+  curl "v2en.co/$str"
+}

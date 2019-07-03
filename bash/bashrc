@@ -98,3 +98,17 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 
 export ZVT_DATA_PATH=/home/devis/OutlierAnalysis/zvt/data
+
+# 在线翻译函数
+v2() {
+  str=''
+  arr=("$@")
+  for i in ${!arr[@]}; do
+    if [ "$i" -eq 0 ]; then
+      str+="${arr[$i]}"
+    else
+      str+="%20${arr[$i]}"
+    fi
+  done
+  curl "v2en.co/$str"
+}

@@ -1,0 +1,13 @@
+# 在线翻译 v2 cool
+v2() {
+  str=''
+  arr=("$@")
+  for (( i=1; i<=$#arr; i++ )); do
+    if [ "$i" -eq 1 ]; then
+      str+="${arr[$i]}"
+    else
+      str+="%20${arr[$i]}"
+    fi
+  done
+  curl "v2en.co/$str"
+}
