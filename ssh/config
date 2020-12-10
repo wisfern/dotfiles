@@ -3,46 +3,6 @@ GSSAPIAuthentication no
 #GSSAPIDelegateCredentials no
 ServerAliveInterval 60
 
-Host hadoop1
-HostName 172.16.1.222
-User hadoop
-Port 22
-
-Host hadoop2
-HostName 172.16.1.223
-User hadoop 
-Port 22
-
-Host hadoop3
-HostName 172.16.1.224
-User hadoop
-Port 22
-
-Host hadoop4
-HostName 172.16.1.225
-User hadoop
-Port 22
-
-Host hadoop5
-HostName 172.16.1.226
-User hadoop
-Port 22
-
-Host hadoop6
-HostName 172.16.1.227
-User hadoop
-Port 22
-
-Host hadoop7
-HostName 172.16.1.228
-User hadoop
-Port 22
-
-Host hadoop8
-Hostname 172.16.1.229
-User hadoop
-Port 22
-
 #Host github.com    
 #	ProxyCommand connect -H 192.168.18.146:8089 %h %p
 #Host *.unix-center.net    
