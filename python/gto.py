@@ -8,9 +8,12 @@ import yaml
 import signal
 import shutil
 from pexpect import pxssh
+
 import logging
 logging.basicConfig(level=logging.INFO,
-                    format="%(level)s %(message)s")
+                    format='%(levelname)s %(message)s')
+
+log = logging.getLogger('gto')
 
 # import pysnooper
 
@@ -37,7 +40,7 @@ class Config(dict):
         :param yaml_file: yaml config file path
         """
         if not os.path.exists(yaml_file):
-            logging.error("%s 路由文件不存在" % yaml_file)
+            log.error("%s 路由文件不存在" % yaml_file)
             return
         with open(yaml_file) as file_obj:
             # https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
@@ -119,7 +122,7 @@ class Config(dict):
                 node = self.get_route(target)[0]
                 return self.local_to_target_route(node) + [target]
         except KeyError as e:
-            logging.error("此主机没有配置路由 {}".format(target))
+            log.error(f"此主机没有配置路由 {target}")
             raise
 
     def generate_target_route(self, target, source='local'):
@@ -280,7 +283,7 @@ class Gto(object):
             self.login_path.append(host)
         else:
             host_info = self.config.get_host(host)
-            logging.debug("host_info = {}".format(host_info))
+            log.debug("host_info = {}".format(host_info))
             if not host_info[6]:
                 options = []
             else:
@@ -304,7 +307,7 @@ class Gto(object):
         try:
             self.login_to(target)
         except Exception as e:
-            logging.error(e)
+            log.error(e)
             sys.exit(1)
 
         # 归还终端
@@ -317,7 +320,7 @@ class Gto(object):
     def scp_file(self, source, target):
         scp_source_d, scp_target_d = self._init_scp_inf(source, target)
         if scp_source_d['s_file'] != scp_target_d['d_file']:
-            logging.error("暂不支持本地与远程文件名不一致的传输")
+            log.error("暂不支持本地与远程文件名不一致的传输")
             return False
         s_d_ru, transit = self.generate_target_route(scp_target_d['d_host'], scp_source_d['s_host'])
         # 登陆到中转机
@@ -341,7 +344,7 @@ class Gto(object):
                                        , focus)
             # TODO: 如果非两端机，还得清理一下中间数据
         except Exception as e:
-            logging.error("[{}] => [{}] error: {}".format(source, target, e))
+            log.error("[{}] => [{}] error: {}".format(source, target, e))
             return False
         else:
             # 完成文件传输
@@ -365,7 +368,7 @@ class Gto(object):
             self._x_get_file_from_source(ru[1:], source_host, source_path, file_name, '/tmp', new_focus)
             self.ssh_logout()
         else:
-            logging.debug("get op, but next host == source {}".format(source_host))
+            log.debug("get op, but next host == source {}".format(source_host))
 
         # 把下一台机的文件scp过来到本机
         scp_source_path = source_path if ru[1] == source_host else '/tmp'
@@ -483,19 +486,22 @@ def main():
     """
     args = parser.parse_args()
 
-    gto = Gto()
-    gto.debug = args.verbose
-    if args.showhosts:
-        gto.config.show_hosts()
-        exit(0)
-    elif args.showroute:
-        gto.config.show_routes()
-    elif args.scp:
-        gto.scp_file(*args.scp)
-    elif args.lflag:
-        gto(args.lflag)
-    else:
-        parser.print_help()
+    try:
+        gto = Gto()
+        gto.debug = args.verbose
+        if args.showhosts:
+            gto.config.show_hosts()
+            exit(0)
+        elif args.showroute:
+            gto.config.show_routes()
+        elif args.scp:
+            gto.scp_file(*args.scp)
+        elif args.lflag:
+            gto(args.lflag)
+        else:
+            parser.print_help()
+    except Exception as e:
+        log.error(e)
 
 
 if __name__ == "__main__":
@@ -503,6 +509,8 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt as e:
         pass
+    except Exception as e:
+        log.error(e)
     # import trace
 
     # create a Trace object, telling it what to ignore, and whether to
