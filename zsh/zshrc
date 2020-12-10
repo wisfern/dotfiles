@@ -50,14 +50,16 @@ ZSH_THEME="ys"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+bindkey "\ej" history-substring-search-down
+bindkey "\ek" history-substring-search-up
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git mvn python pyenv)
+plugins=(docker git tig mvn python pyenv vim-interaction tmux z wd)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.function
 
 # User configuration
 
@@ -96,8 +98,6 @@ test -s ~/.alias && . ~/.alias || true
 test -s ~/.bash_alias && . ~/.bash_alias || true
 test -s ~/.function && . ~/.function || true
 
-test -s ~/work/code/env_init && . ~/work/code/env_init || true
-
 ulimit -c unlimited
 
 export JAVA_HOME=/usr
@@ -105,11 +105,11 @@ export JAVA_HOME=/usr
 export HADOOP_HOME=/home/devis/hadoop/hadoop-2.7.2
 export HBASE_HOME=/home/devis/hadoop/hbase-1.1.4
 export HIVE_HOME=/home/devis/hadoop/hive-1.2.1
-export MAVEN_HOME=/home/devis/hadoop/apache-maven-3.3.9
+export MAVEN_HOME=/home/devis/tools/apache-maven-3.6.3
 export PATH=$PATH:$HADOOP_HOME/bin:$HBASE_HOME/bin:$HIVE_HOME/bin:$MAVEN_HOME/bin
 export HADOOP_USER_NAME=hadoop
-export PYTHONPATH=/home/devis/git/vnpy:/home/devis/git/backtrader:/home/devis/OutlierAnalysis/zvt
-export ZVT_DATA_PATH=/home/devis/OutlierAnalysis/zvt/data
+export PYTHONPATH=/home/devis/2.OutlierAnalysis/vnpy:/home/devis/2.OutlierAnalysis/zvt
+export ZVT_DATA_PATH=/home/devis/2.OutlierAnalysis/zvt/data
 
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE=fcitx
@@ -123,16 +123,19 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(pipenv --completion)"
 
+#eval "$(pandoc --bash-completion)"
+
 source /home/devis/.gvm/scripts/gvm
 export GOROOT=/home/devis/go
 export GOPATH=/home/devis/gopkg
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/home/devis/pycharm-community-2019.1.3/bin:/home/devis/idea-IC-191.7479.19/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/home/devis/pycharm-community-2019.3.3/bin
 
 #alias
 alias tnew="tmux new -s"
 alias wget='wget -c'
 alias vi='vim'
 alias grep="grep --color=auto"
+alias sqlite='sqlite3 -column -header'
 alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
 alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
 alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
@@ -147,3 +150,6 @@ alias -s bz2='tar -xjvf'
 
 [[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# 使pipenv在项目目录生成虚拟目录
+export PIPENV_VENV_IN_PROJECT=1
