@@ -20,6 +20,22 @@ proxies:
       headers: 
         Host: vvm-site-ray.wisfern.repl.co
         
+  # 参考https://bbs.quantclass.cn/thread/20301生成服务节点
+  # 代码来自：https://github.com/wisfern/replit-xray
+  - name: India-IN02.replit
+    server: BruisedBewitchedNetwork.wisfern.repl.co
+    port: 443
+    type: vmess
+    uuid: 3e4f6dee-2b3f-437b-9e38-ecd6c0d883dc
+    alterId: 0
+    cipher: auto
+    tls: true
+    network: ws
+    ws-opts:
+      path: /3e4f6dee-2b3f-437b-9e38-ecd6c0d883dc-vm
+      headers: 
+        Host: BruisedBewitchedNetwork.wisfern.repl.co
+        
 proxy-groups:
   - name: 🚀 节点选择
     type: select
