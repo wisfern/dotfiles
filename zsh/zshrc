@@ -20,7 +20,7 @@ ZSH_THEME="ys"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -57,7 +57,7 @@ bindkey "\ek" history-substring-search-up
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker git tig mvn python pyenv vim-interaction tmux z wd)
+plugins=(docker git tig mvn python pyenv vim-interaction tmux z wd thefuck)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -118,9 +118,9 @@ export QT_IM_MODULE=fcitx
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export PATH="/home/devis/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#export PATH="/home/devis/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 eval "$(pipenv --completion)"
 
 #eval "$(pandoc --bash-completion)"
@@ -153,3 +153,44 @@ alias -s bz2='tar -xjvf'
 
 # 使pipenv在项目目录生成虚拟目录
 export PIPENV_VENV_IN_PROJECT=1
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init -)"
+ eval "$(pyenv virtualenv-init -)"
+fi
+
+# the fuck
+eval "$(thefuck --alias)"
+
+# FIx 小键盘问题
+# Home
+bindkey '\e[1~' beginning-of-line
+# End
+bindkey '\e[4~' end-of-line
+
+# Keypad
+# 0 . Enter
+bindkey -s "^[Op" "0"
+bindkey -s "^[Ol" "."
+bindkey -s "^[OM" "^M"
+# 1 2 3
+bindkey -s "^[Oq" "1"
+bindkey -s "^[Or" "2"
+bindkey -s "^[Os" "3"
+# 4 5 6
+bindkey -s "^[Ot" "4"
+bindkey -s "^[Ou" "5"
+bindkey -s "^[Ov" "6"
+# 7 8 9
+bindkey -s "^[Ow" "7"
+bindkey -s "^[Ox" "8"
+bindkey -s "^[Oy" "9"
+# + -  * /
+bindkey -s "^[Ok" "+"
+bindkey -s "^[Om" "-"
+bindkey -s "^[Oj" "*"
+bindkey -s "^[Oo" "/"
